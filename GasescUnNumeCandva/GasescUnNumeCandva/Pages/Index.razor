@@ -1,0 +1,67 @@
+﻿@page "/"
+@page "/ro-home"
+@using GasescUnNumeCandva.Scripts
+
+
+<PageTitle>Index</PageTitle>
+
+<h1>Bine ați venit!</h1>
+
+<select asp-for="Selectati formatul:" @bind="numbers_form">
+    <option disabled hidden selected>Selectati formatul:</option>
+    <option>Forma binara</option>
+    <option>Forma zecimala</option>
+</select>
+
+<div class="flex-column">
+    <p>Introduceti doua numere in formatul ales: </p>
+    <div class="d-flex">
+        <div class="card">
+            <p>x: </p>
+            <input type="text" @bind="x"/>
+        </div>
+        <p> </p>
+        <div class="card">
+            <p>y: </p>
+            <input type="text" @bind="y"/>
+        </div>
+    </div>
+</div>
+
+<div>x = @x</div>
+<div>y = @y</div>
+
+<select asp-for="Selectati algoritmul:" @bind="algorithm_type">
+    <option disabled hidden selected>Selectati algoritmul:</option>
+    <option>SignMagnitude</option>
+    <option>Robertson</option>
+    <option>Booth</option>
+</select>
+
+@code
+
+{
+    private string numbers_form;
+    private string algorithm_type;
+    private string x, y;
+
+    private Numbers num;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    private int SelectToInt()
+    {
+        switch (numbers_form)
+        {
+            case "Forma binara" :
+                return 1;
+            case "Forma zecimala" :
+                return 2;
+            default:
+                return 0;
+        }
+    }
+}
